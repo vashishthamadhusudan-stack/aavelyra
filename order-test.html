@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8f3ed">
+<title>Aavelyra — Test Order Flow</title>
+<style>
+:root{--ink:#2d2422;--muted:#786a64;--cream:#faf6f0;--paper:#fffdfa;--rose:#793b4c;--line:#e8dcd2;--gold:#b08a59}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:15px/1.6 Arial,sans-serif}.wrap{max-width:760px;margin:auto;padding:24px 16px 60px}.brand{font:26px Georgia,serif;letter-spacing:.13em;color:var(--rose);text-decoration:none}.panel{background:var(--paper);border:1px solid var(--line);padding:22px;margin-top:20px}.notice{background:#f2e8de;border:1px solid var(--line);padding:14px;font-size:13px}.eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);font-weight:bold}h1{font:normal 38px/1.1 Georgia,serif;margin:12px 0}p{color:var(--muted)}label{display:block;font-weight:bold;font-size:13px;margin:16px 0 6px}select,input{width:100%;padding:12px;border:1px solid var(--line);background:white;color:var(--ink);font:inherit;border-radius:0}.btn{display:inline-block;background:var(--rose);color:white;padding:14px 18px;text-decoration:none;border:0;margin-top:20px;width:100%;font-weight:bold;cursor:pointer}.btn:hover{background:#5e2939}.back{display:inline-block;margin-top:18px;color:var(--rose)}.tiny{font-size:11px;color:var(--muted)}.preview{white-space:pre-wrap;background:#f7f1eb;padding:14px;font-size:13px;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main class="wrap">
+<a class="brand" href="./index.html">AAVELYRA</a>
+<div class="panel">
+<span class="eyebrow">Internal test page</span>
+<h1>Try the WhatsApp order flow</h1>
+<p>This page is for testing the order-message flow only. It does not take payment, reserve stock, or create a confirmed order.</p>
+<div class="notice"><strong>TEST ONLY:</strong> The WhatsApp message will clearly say “TEST ORDER — DO NOT PROCESS”. Do not send customer personal details in this test. Check the WhatsApp business number before using this page.</div>
+<label for="product">Choose a sample product</label>
+<select id="product">
+<option value="Everyday Cotton Kurti — sample listing, not verified stock">Everyday Cotton Kurti — sample listing</option>
+<option value="Printed Kurti Set — sample listing, not verified stock">Printed Kurti Set — sample listing</option>
+<option value="Easy Day Dress — sample listing, not verified stock">Easy Day Dress — sample listing</option>
+<option value="Everyday Statement Top — sample listing, not verified stock">Everyday Statement Top — sample listing</option>
+<option value="Relaxed Co-ord Set — sample listing, not verified stock">Relaxed Co-ord Set — sample listing</option>
+<option value="Festive-Feel Kurti — sample listing, not verified stock">Festive-Feel Kurti — sample listing</option>
+</select>
+<label for="size">Sample size</label>
+<select id="size"><option>S</option><option selected>M</option><option>L</option><option>XL</option><option>Need size guidance</option></select>
+<label for="qty">Quantity</label>
+<select id="qty"><option>1</option><option>2</option></select>
+<button class="btn" id="previewBtn" type="button">Preview test order message</button>
+<div id="preview" class="preview" hidden></div>
+<a class="btn" id="wa" href="#" target="_blank" rel="noopener" hidden>Open WhatsApp with test message</a>
+<p class="tiny">Opening WhatsApp does not send the message automatically. You must review it and press Send yourself. Do not use this test flow for a real purchase.</p>
+</div>
+<a class="back" href="./index.html">← Back to Aavelyra storefront</a>
+</main>
+<script>
+const number='917348863362';
+const preview=document.getElementById('preview');
+const wa=document.getElementById('wa');
+document.getElementById('previewBtn').addEventListener('click',()=>{
+ const product=document.getElementById('product').value;
+ const size=document.getElementById('size').value;
+ const qty=document.getElementById('qty').value;
+ const message='TEST ORDER — DO NOT PROCESS.\nThis is only a test of Aavelyra’s order flow; no purchase or stock reservation is intended.\nSample item: '+product+'\nSize: '+size+'\nQuantity: '+qty+'\nPlease confirm that this is a test message only.';
+ preview.textContent=message;
+ preview.hidden=false;
+ wa.href='https://wa.me/'+number+'?text='+encodeURIComponent(message);
+ wa.hidden=false;
+});
+</script>
+</body>
+</html>
